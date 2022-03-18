@@ -13,9 +13,11 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-fs.readdirSync("./routes").map((r) =>
-  app.use("/api", require(`./routes/${r}`))
-);
+
+app.use("/api/users", require("./routes/usersRouts"));
+// fs.readdirSync("./routes").map((r) =>
+//   app.use("/api", require(`./routes/${r}`))
+// );
 app.use(errorHandler);
 //app.use("/Api", auth);
 
