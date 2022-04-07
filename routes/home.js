@@ -17,13 +17,7 @@ router.get("/get-home", getHome);
 router.post("/create-home", upload.array("images"), protect, createHome);
 router.get("/postedby", protect, getAllPostedBy);
 router.delete("/delete-home/:homeId", protect, checkIsOwmer, removeHome);
-router.put(
-  "/home/edit/:homeId",
-  upload.array("images"),
-  protect,
-  checkIsOwmer,
-  updateHome
-);
+router.put("/home/edit/:homeId", upload.array("images"), protect, updateHome);
 router.get("/home/:homeId", getOneHome);
 
 module.exports = router;

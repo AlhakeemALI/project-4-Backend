@@ -2,13 +2,10 @@ const asyncHandler = require("express-async-handler");
 const querystring = require("querystring");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
-//console.log(stripe);
-//const stripe = Stripe(process.env.STRIPE_SECRET);
-//const stripe = Stripe(process.env.STRIPE_SECTET);
+
 const User = require("../models/userModel");
 
 const createStripeId = asyncHandler(async (req, res) => {
-  //const id = req.user.id;
   const user = await User.findById(req.user._id).exec();
 
   console.log("REQ USER ID===>", user);

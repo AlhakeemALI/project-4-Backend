@@ -12,9 +12,8 @@ const getHome = asyncHandler(async (req, res) => {
 });
 
 const createHome = asyncHandler(async (req, res) => {
-  //const { title, content, location, price, room } = req.body;
-  //console.log(req.body);
-  //console.log("this is req.file=====>", req);
+  console.log(req.body);
+
   const newHome = new Home(req.body);
   newHome.images = req.files.map((f) => ({
     url: f.path,
@@ -37,13 +36,10 @@ const createHome = asyncHandler(async (req, res) => {
 });
 
 const getAllPostedBy = asyncHandler(async (req, res) => {
-  console.log("hello");
-  console.log(req.user.id);
   const homePostedBy = await Home.find({ postedBy: req.user.id }).populate(
     "postedBy",
     "id , name"
   );
-  console.log(homePostedBy);
 
   res.status(200).json(homePostedBy);
 });
@@ -59,18 +55,50 @@ const getOneHome = asyncHandler(async (req, res) => {
     "postedBy",
     "name"
   );
-  //console.log(fineOneHome);
+
   res.status(200).json(fineOneHome);
 });
 
-const updateHome = asyncHandler(async (req, res) => {
-  console.log("hello");
-  const findHome = await Home.findByIdAndUpdate(req.params.homeId, req.body, {
+const updateHome = asyncHandler((req, res) => {
+  // console.log("hello");
+  // console.log("findHome,", "<======this is home that you looking foor");
+  //console.log(req, "REQ, ====>");
+
+  // const findHome = await Home.findByIdAndUpdate(req.params.homeId, req.body, {
+  //   new: true,
+  // });
+  // findHome.images = req.files.map((f) => ({
+  //   url: f.path,
+  //   filename: f.filename,
+  // }));
+
+  // images = req.files.map((f) => ({
+  //   //   url: f.path,
+  //   //   filename: f.filename,
+  //   // }));
+  // console.log(req.body, "this is ");
+  // console.log("this is req ", req.params);
+
+  Home.findOneAndUpdate({ _id: req.params.homeId }, req.body, {
     new: true,
-  });
-  console.log(findHome);
-  findHome.save();
-  res.status(204).json(findHome);
+  }).then((data) => res.status(200).json(data));
+  //console.log(findHome, "find home");
+  // const findHome = await Home.findOneAndUpdate(
+  //   { _id: req.params.homeId },
+  //   req.body,
+  //   {
+  //     new: true,
+  //   }
+  // );
+
+  // console.log("this is find hom ===> ", findHome);
+  // if (findHome) {
+  //   console.log(findHome, "<===== HOME AFTER SAVE");
+  //   //await findHome.save();
+  //   res.send(findHome);
+  // }
+  console.log("this is find hom ===> ", findHome);
+  // res.status(200).json(findHome);
 });
 
 module.exports = {
