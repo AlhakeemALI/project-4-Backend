@@ -20,4 +20,6 @@ router.delete("/delete-home/:homeId", protect, checkIsOwmer, removeHome);
 router.put("/home/edit/:homeId", upload.array("images"), protect, updateHome);
 router.get("/home/:homeId", getOneHome);
 
+//console.log(protect)
+
 module.exports = router;
