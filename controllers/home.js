@@ -98,7 +98,6 @@ const updateHome = asyncHandler((req, res) => {
   //   res.send(findHome);
   // }
   console.log("this is find hom ===> ", findHome);
-  // res.status(200).json(findHome);
 });
 
 module.exports = {
