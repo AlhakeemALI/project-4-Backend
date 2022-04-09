@@ -24,6 +24,9 @@ app.get("/api/config/paypal", (req, res) =>
 );
 app.use(errorHandler);
 
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname)));
+// }
 app.listen(port, () => {
   console.log(`Serving on port ${port}`);
 });
